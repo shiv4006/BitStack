@@ -92,7 +92,7 @@ const AboutPage = () => {
             Our Journey
           </h2>
           <div className="space-y-6">
-            {milestones.map((milestone, idx) => (
+            {milestones.map((milestone) => (
               <div key={milestone.year} className="flex gap-6 items-start">
                 <div className="w-24 flex-shrink-0">
                   <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg text-center font-bold">
