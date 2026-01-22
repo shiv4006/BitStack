@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { subscribeNewsletter } from "../../api/api";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -14,6 +17,24 @@ const Footer = () => {
     { icon: '💬', label: 'Facebook', href: '#' },
     { icon: '📷', label: 'Instagram', href: '#' }
   ];
+
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscribe = async () => {
+    if (!email) return alert("Enter email");
+
+    try {
+      setLoading(true);
+      const res = await subscribeNewsletter(email);
+      alert(res.data.message);
+      setEmail("");
+    } catch (err) {
+      alert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <footer className="bg-gradient-to-b from-slate-50 to-slate-100 border-t border-gray-200">
@@ -104,9 +125,11 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
               />
-              <button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
+              <button onClick={handleSubscribe} disabled={loading} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300">
                 Subscribe
               </button>
             </div>

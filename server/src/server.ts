@@ -1,12 +1,26 @@
 import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes";
+import newsletterRoutes from "./routes/newsletter.routes";
 
 dotenv.config();
 
 const app = express();
+
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://bit-stack-client.vercel.app/"
+    ],
+    credentials: true, // IMPORTANT for cookies
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // Middleware
 app.use(express.json());
@@ -35,6 +49,7 @@ app.get("/health", (req: Request, res: Response) => {
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/newsletter", newsletterRoutes);
 
 // Error handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
