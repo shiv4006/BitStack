@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.routes";
 import newsletterRoutes from "./routes/newsletter.routes";
+import { connectDB } from "./db/db";
 
 dotenv.config();
 
@@ -45,11 +46,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Database connection
-mongoose
-  .connect(process.env.MONGO_URI!)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("MongoDB connection error:", error));
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
+});
 
 // Logger
 app.use((req: Request, res: Response, next: NextFunction) => {
