@@ -8,8 +8,18 @@ import IndustriesPage from './components/pages/Industries'
 import AboutPage from './components/pages/About'
 import ContactPage from './components/pages/Contact'
 import CareerPage from './components/pages/Career'
+import { useEffect } from 'react'
+import { useAppDispatch } from './store/hooks.ts'
+import { loadUserThunk } from './store/authSlice.ts'
+import Login from './components/auth/Login.tsx'
+import Signup from './components/auth/Signup.tsx'
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(loadUserThunk());
+  }, [dispatch]);
 
   return (
     <>
@@ -17,6 +27,8 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/about" element={<AboutPage />} />
