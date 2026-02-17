@@ -10,7 +10,8 @@ const Header = () => {
     { label: 'Services', href: '/services' },
     { label: 'Industries', href: '/industries' },
     { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/contact' }
+    { label: 'Contact', href: '/contact' },
+    { label: 'Career', href: '/career' }
   ];
 
   const isActive = (href: string) => {

@@ -7,6 +7,7 @@ import ServicesPage from './components/pages/Services'
 import IndustriesPage from './components/pages/Industries'
 import AboutPage from './components/pages/About'
 import ContactPage from './components/pages/Contact'
+import CareerPage from './components/pages/Career'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/career" element={<CareerPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
